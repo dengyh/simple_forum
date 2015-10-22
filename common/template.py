@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from mako.lookup import TemplateLookup
 from django.conf import settings
 from django.http import HttpResponse
 from django.template import Context, RequestContext
+from mako.lookup import TemplateLookup
 
-lookup = TemplateLookup(
+templateLookup = TemplateLookup(
     directories=settings.MAKO_TEMPLATE_DIR,
     module_directory=settings.MAKO_TEMPLATE_MODULE_DIR,
     output_encoding='utf-8',
@@ -16,7 +16,7 @@ lookup = TemplateLookup(
 
 def render(request, templateName, dictionary={}):
     contextInstance = RequestContext(request)
-    template = lookup.get_template(templateName)
+    template = templateLookup.get_template(templateName)
 
     if contextInstance:
         contextInstance.update(dictionary)

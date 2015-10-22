@@ -1,7 +1,6 @@
-from django.shortcuts import render
-from common.mako import render
+from common.template import render
 
 # Create your views here.
 
 def index_view(request, templateName):
-    return render(templateName)
+    return render(request, templateName)

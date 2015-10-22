@@ -17,15 +17,17 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 
-print settings.MEDIA_ROOT
-
 urlpatterns = [
     url(r'', include('base.urls', namespace='base')),
     url(r'^account/', include('account.urls', namespace='account')),
     url(r'^post/', include('forum.urls', namespace='forum')),
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.STATIC_ROOT,
+        }),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': settings.MEDIA_ROOT,
         }),
+
+    url(r'^admin/', include(admin.site.urls)),
 ]
